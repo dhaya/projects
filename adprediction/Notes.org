@@ -1,0 +1,42 @@
+* Ad Prediction At Google
+
+Lessons and tricks learnt and things that didn't work out. Issues
+of memory savings, performance analysis, confidence in predictions,
+calibration and feature management.
+
+** System overview
+P(click | query, ad) is an input to auction process.
+Data is sparse, tiny fraction of non-zero feature values per example.
+Reguarize logistic regression are a natural fit for this problem setting.(Why?)
+
+Training method is similar to the Downpour SGD [8] (How does that work?)
+
+Sparsification at serving time?
+
+OGD is the same as SGD.
+
+
+Aside: Sigmoid function is used to model threshold/fire-notfire decisions by a continuos
+function. By changing the weights we can either make it like a step function or a threshold
+or a linear function in some range. For instance the sigmoid is linear near the origin. (How is this useful?)
+see: http://www.computing.dcu.ie/~humphrys/Notes/Neural/sigmoid.html
+
+
+Aside: Logistic regression
+Logistic model is co-ordinate free. Invariant under variable shifting, scaling or
+combining.
+Logistic regression preserves the marginal probabilities of the training data.
+see: http://www.win-vector.com/blog/2011/09/the-simpler-derivation-of-logistic-regression/
+Logistic regression can be easily parallized.
+Logistic regression is equivalent to a single layer neural net with sigmoid non-linearity
+
+
+Normal gradient descent is not incremental.
+See: https://docs.google.com/a/inmobi.com/document/d/1rtYWJsSsRyKAoypKXdI7NoPLRHyI5rpTBRyRGOl1qvA/edit#
+
+Logloss = - (y log p + (1-y) log (1-p))
+        = - (log p^y + log (1-p)^(1-y))
+        = - (log (p^y * (1-p)^(1-y)))
+
+TODO:
+Need to understand convex optimization before looking at learning rates.

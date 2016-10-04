@@ -1,0 +1,7 @@
+.mode csv
+.separator ","
+.import pfresults.csv data_perf
+.import rtresults.csv data_rtb
+.read queries.sql
+.save pricing.db
+.quit
